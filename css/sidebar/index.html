@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <title>纯CSS实现侧边栏</title>
+    <style media="screen">
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background-color: #2DB7F5;
+        color: #08172F;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+      }
+      .toggle {
+        display: none;
+      }
+      main {
+        position: relative;
+        width: 120%;
+        height: 100%;
+        transition: transform .8s;
+      }
+      main aside,
+      main section {
+        position: absolute;
+        height: 100%;
+      }
+      aside {
+        width: 200px;
+      }
+      section {
+        left: 200px;
+        width: 100%;
+        padding-left: 1em;
+        padding-right: 25%;
+      }
+      .clickme {
+        position: absolute;
+        top: 20px;
+        right: 0;
+        width: 20px;
+        height: 20px;
+        color: inherit;
+        border: 2px solid currentColor;
+        border-left: none;
+        border-right: none;
+        opacity: 0;
+        transition: opacity .8s;
+      }
+      .clickme::before,
+      .clickme::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: currentColor;
+      }
+      .clickme::before {
+        top: 25%;
+      }
+      .clickme::after {
+        bottom: 25%;
+      }
+
+      .sidebar li {
+        margin: 10px 0;
+        transition: transform .8s .8s;
+      }
+
+      .sidebar li a {
+        color: rgba(0, 0, 0, .8);
+        text-decoration: none;
+      }
+
+      .sidebar li:nth-of-type(2) {
+        transition-delay: 1s;
+      }
+      .sidebar li:nth-of-type(3) {
+        transition-delay: 1.2s;
+      }
+      .sidebar li:nth-of-type(4) {
+        transition-delay: 1.4s;
+      }
+
+
+      .content {
+        box-shadow: inset 500px 500px 500px rgba(0,0,0,.4);
+      }
+      #content:checked+main {
+        transform: translateX(-180px);
+      }
+
+      #content:checked+main .clickme {
+        opacity: 1;
+      }
+
+      #content:checked+main .sidebar li {
+        transform: translateX(-100%);
+      }
+
+      #content:checked+main .content {
+        box-shadow: none;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <input class="toggle" type="radio" id="sidebar" name="toggle" />
+    <input class="toggle" type="radio" id="content" name="toggle" checked />
+    <main>
+        <aside class="sidebar">
+            <ul>
+              <li><a href="#">button 1</a></li>
+              <li><a href="#">button 2</a></li>
+              <li><a href="#">button 3</a></li>
+              <li><a href="#">button 4</a></li>
+            </ul>
+            <label for="sidebar">
+              <div class="clickme">
+
+              </div>
+            </label>
+        </aside>
+      <label for="content">
+        <section class="content">
+          <h2>这里是主内容</h2>
+          <p>
+            通过合理的使用radio来实现侧边栏切换效果～
+          </p>
+        </section>
+      </label>
+    </main>
+  </body>
+</html>
